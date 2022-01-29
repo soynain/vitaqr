@@ -4,7 +4,7 @@ const path = require('path'); //exportar archivos
 const siquel = require('../querys/condb.js').siquel;//los module exports nos dejan exportar muchos objetos
 const cryptar = require('../querys/moduloCrypt') //cuando hay archivos en la misma carpeta, ponemos dos puntos
 const passport = require('passport')
-const QRCode = require('easyqrcodejs-nodejs');
+const QRCode = require('qrcode')
 const ox = require('crypto');
 var block = false; //no puedo acceder a rutas de acceso y login
 
@@ -127,13 +127,29 @@ router.post('/profile/privacidad/save', loggedIn, async (req, res) => {
 //rutas post
 router.post('/profile/edit/qr-update', loggedIn, async (req, res) => { //editar contactos existentes, el where se modifica con el foreign ke
   const idPulsera = generatePassword()
-  const especificaciones = {
+  /*const especificaciones = {
     text: "https://vitaqr.herokuapp.com/show_public_profile/" + idPulsera,
     width: 21,
     height: 21
-  }
-  qrcliente = new QRCode(especificaciones);
-  qrcliente.toDataURL().then(data => {
+  }*/
+  QRCode.toDataURL(`https://vitaqr.herokuapp.com/show_public_profile/${idPulsera}`, function (err, url) {
+   // console.log(url)
+    siquel.query('update `blob_temp` set image=? where id=?', [url, req.user.idPulsera], (err, results, fields) => {
+      if (err) throw err;
+   //   console.log(data)
+      console.log('código QR ACTUALIZADO')
+      siquel.query('update `blob_temp` set id=? where id=?', [idPulsera, req.user.idPulsera], (err, results, fields) => {
+        if (err) throw err;
+   //     console.log(data)
+        console.log('código QR ACTUALIZADO')
+        req.user.idPulsera = idPulsera;
+        res.redirect('/users/profile')
+      })
+    })
+  })
+
+  // qrcliente = new QRCode(especificaciones);
+  /*qrcliente.toDataURL().then(data => {
     siquel.query('update `blob_temp` set image=? where id=?', [data, req.user.idPulsera], (err, results, fields) => {
       if (err) throw err;
       console.log(data)
@@ -146,7 +162,7 @@ router.post('/profile/edit/qr-update', loggedIn, async (req, res) => { //editar 
         res.redirect('/users/profile')
       })
     })
-  })
+  })*/
 })
 
 
@@ -197,8 +213,8 @@ router.post('/register', async (req, res) => {
       width: 21,
       height: 21
     }
-    qrcliente = new QRCode(especificaciones);
-    qrcliente.toDataURL().then(data => {
+    QRCode.toDataURL(`https://vitaqr.herokuapp.com/show_public_profile/${idPulsera}`, function (err, url) {
+      console.log(url)
       siquel.query('INSERT INTO `blob_temp` values(?, ?)', [idPulsera, data], (err, results, fields) => {
         if (err) throw err;
         console.log(data)
@@ -214,6 +230,25 @@ router.post('/register', async (req, res) => {
         })
       })
     })
+
+
+    // qrcliente = new QRCode(especificaciones);
+    /* qrcliente.toDataURL().then(data => {
+       siquel.query('INSERT INTO `blob_temp` values(?, ?)', [idPulsera, data], (err, results, fields) => {
+         if (err) throw err;
+         console.log(data)
+         console.log('código QR guardado')
+         siquel.query('INSERT INTO `user_prof` values(null,?,?,?,?,null,null,null,null,null,null,1)', [req.body.nombres, req.body.usuario, hash, idPulsera], (err, results, fields) => {
+           if (err) throw err;
+           console.log(results)
+           siquel.query('INSERT INTO `visibilidad` values(?,1,1,1,1,1,1)', [results.insertId], (err, results, fields) => {
+             if (err) throw err;
+             console.log('usuario registrado')
+             res.render('login', exito = { mensaje: 'ya puede iniciar sesion' })
+           })
+         })
+       })
+     })*/
 
 
   }

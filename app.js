@@ -6,6 +6,8 @@ const session = require('express-session')
 //const MySQLStore=require('express-mysql-session')(session) //para vincularlo a tu session local
 const passport = require('passport')
 const aux = require('./querys/condb').siquel
+const useragent = require('express-useragent');
+
 var port = process.env.PORT || 3000;
 app.set('view engine', 'ejs') //el view engine que se usa para modificar html dinamico
 require('./querys/auth.js').passport //para inicializar el passport
@@ -23,6 +25,7 @@ app.use(express.json()) //jsons ver en consola
 app.use(express.urlencoded({ extended: false })); //no se para que es
 app.use(passport.initialize())  //empezar passport
 app.use(passport.session())  //multiples sesiones
+app.use(useragent.express());
 
 app.get('/', (req, res) => {
   res.render("index");

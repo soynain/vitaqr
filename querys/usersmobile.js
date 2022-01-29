@@ -4,10 +4,10 @@ const path = require('path'); //exportar archivos
 const siquel = require('../querys/condb.js').siquel;//los module exports nos dejan exportar muchos objetos
 const cryptar = require('../querys/moduloCrypt') //cuando hay archivos en la misma carpeta, ponemos dos puntos
 const passport = require('passport')
-const QRCode = require('easyqrcodejs-nodejs');
+const QRCode = require('qrcode')
 const ox = require('crypto');
 var block = false; //no puedo acceder a rutas de acceso y login
-const promisePool=siquel.promise()
+const promisePool = siquel.promise()
 
 function loggedIn(req, res, next) { //middleware para no acceder a rutas de usuario
   if (req.isAuthenticated()) {
@@ -24,7 +24,11 @@ function blocki(req, res, next) { //middleware para no acceder a rutas de regist
   }
 }
 
-
+function generatePassword(wishlist = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') {
+  return Array.from(ox.randomFillSync(new Uint8Array(8)))
+    .map((x) => wishlist[x % wishlist.length])
+    .join('').toString();
+}
 
 router.get('/failed', (req, res) => {
   res.sendStatus(401)
@@ -34,8 +38,9 @@ router.get('/datosprincipales', loggedIn, async (req, res) => {
   try {
     const [InformacionPersonal, fields] = await siquel.query(`select fullname,fechaNac,sexo,color_ojos,altura,peso,numTelefono,image from 
     user_prof inner join blob_temp on user_prof.idPrim=blob_temp.id where idPrim=?`, [req.user.idPrim]);
-  //  console.log(InformacionPersonal)
+    //  console.log(InformacionPersonal)
     if (Object.keys(InformacionPersonal).length !== 0) {
+      InformacionPersonal['idPulsera'] = req.user.idPulsera
       return res.json({ InformacionPersonal });
     } else {
       return res.sendStatus(404)
@@ -46,11 +51,11 @@ router.get('/datosprincipales', loggedIn, async (req, res) => {
   }
 })
 
-router.get('/contactos',loggedIn, async (req, res) => {
-  try { 
-    const [Contactos,fields] = await promisePool.query('select nombreCompleto, relacion, telefono from contact_info inner join user_prof on contact_info.id_Prim=user_prof.idPrim where id_Prim=?' , [req.user.idPrim]);
-  //  console.log(Contactos);
-   if (Contactos.length!==0) {
+router.get('/contactos', loggedIn, async (req, res) => {
+  try {
+    const [Contactos, fields] = await promisePool.query('select nombreCompleto, relacion, telefono from contact_info inner join user_prof on contact_info.id_Prim=user_prof.idPrim where id_Prim=?', [req.user.idPrim]);
+    console.log(req.useragent);
+    if (Contactos.length !== 0) {
       return res.json({ Contactos });
     } else {
       return res.sendStatus(404)
@@ -69,6 +74,58 @@ router.post('/login',
   }
 )
 
+router.post('/mod-informacion-personal', loggedIn, async (req, res) => {
+  const { fullname, fechaNac, sexo, color_ojos, altura, peso, numTelefono } = req.body
+  try {
+    await promisePool.query('update user_prof set fullname=?,fechaNac=?,sexo=?,color_ojos=?,altura=?,peso=?,numTelefono=? where idPrim=?',
+      [fullname, new Date(fechaNac), sexo, color_ojos, altura, peso, numTelefono, req.user.idPrim]);
+    return res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    return res.sendStatus(500)
+  }
+})
+
+router.post('/add-contacto', loggedIn, async (req, res) => {
+  const { id_Prim, nombreCompleto, relacion, telefono } = req.body
+  try {
+    await promisePool.execute('insert into contact_info values (null,?,?,?,?)', [id_Prim, nombreCompleto, relacion, telefono])
+    return res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
+
+router.post('/delete-contacto', loggedIn, async (req, res) => {
+  const { id, nombreCompleto, relacion } = req.body
+  try {
+    await promisePool.execute('delete from contact_info where id=? and nombreCompleto=? and relacion=?', [id, nombreCompleto, relacion])
+    return res.sendStatus(200)
+  } catch (err) {
+    console.log(err)
+    res.sendStatus(500)
+  }
+})
+
+router.post('/renovar-qr', loggedIn, async (req, res) => {
+  const { idPulsera } = req.body
+  const newIdPulsera = generatePassword()
+  const data = await QRCode.toDataURL(`https://vitaqr.herokuapp.com/show_public_profile/${newIdPulsera}`)
+  try {
+    await promisePool.query('update blob_temp set image=? where id=?', [data,idPulsera]);
+    try {
+      await promisePool.query('update blob_temp set id=? where id=?', [newIdPulsera,idPulsera]);
+      return res.sendStatus(200)
+    } catch (err) {
+      console.log(err, ' segundo update')
+      return res.sendStatus(500)
+    }
+  } catch (err) {
+    console.log(err, ' primer update')
+    return res.sendStatus(500)
+  }
+})
 
 
 module.exports = router

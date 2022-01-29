@@ -5,9 +5,12 @@ const path = require('path')
 const util = require('util')
 require('dotenv').config()
 
+
+
+
 const siquel = mysql.createPool({  //creas hilos multiples, para producción
   host: process.env.HOST_NAME,
-  port: process.env.PORT,
+  port: process.env.PORTDB,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
@@ -20,16 +23,17 @@ const siquel = mysql.createPool({  //creas hilos multiples, para producción
 router.get('/:id', async (req, res) => {
   let searchValid = req.params.id
   const promisePool = siquel.promise()
+  let perQuery={},contactQuery=[],privacyOpc={}
   try {
     const [results, fields] = await promisePool.execute('SELECT * FROM `user_prof` where idPulsera = ?', [searchValid])
     if (results.length > 0) {
-      const perQuery = results[0]   //hay que hacer esto para acceder al objeto, es un array de objetos
+      perQuery = results[0]   //hay que hacer esto para acceder al objeto, es un array de objetos
       console.log(perQuery)
       try {
         const [results1, fields] = await promisePool.execute
           ('select id, nombreCompleto, relacion, telefono from `user_prof` inner join `contact_info` on contact_info.id_prim=user_prof.idPrim where idPulsera=?',
             [searchValid])
-        const contactQuery = results1;
+        contactQuery = results1;
         console.log(contactQuery)
       } catch (err) {
         console.log(err, ' segunda query')
@@ -38,9 +42,14 @@ router.get('/:id', async (req, res) => {
       try {
         const [results2, fields] = await promisePool.execute('select idvis,inf_bas,contactos,alergias,padecimientos,medicamentos,medico from `user_prof` inner join visibilidad on visibilidad.idvis=user_prof.idPrim where idPulsera=?'
           , [searchValid])
-        const privacyOpc = results2[0]
+        privacyOpc = results2[0]
         console.log(privacyOpc)
-        return res.render('cons.ejs', { fila1: perQuery, fila2: contactQuery, fila3: privacyOpc })
+        if(req.useragent.isDesktop){
+          return res.render('cons.ejs', { fila1: perQuery, fila2: contactQuery, fila3: privacyOpc })
+        }else if(req.useragent.isMobile || req.useragent.isBot){
+          const obj={InformacionPersonal:perQuery,Contactos:contactQuery,Privacidad:privacyOpc}
+          return res.json(obj)
+        }
       } catch (err) {
         console.log(err, ' tercera query')
         return res.sendStatus(400)

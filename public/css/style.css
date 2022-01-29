@@ -267,14 +267,14 @@
 .cuerpo-qr{
     padding: 1%;
     width: 350px;
-    height: 350px;
+    height: auto;
 }
 #qrcode{
     display: flex;
     justify-content: center;
 }
 .qr-img-profile{
-    height: 160px;width: 160px;
+    height: 200px;width: 200px;
 }
 
 #newcontact{
