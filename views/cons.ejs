@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="/css/style.css">
+
+    <title>Consulta</title>
+
+</head>
+
+<body>
+    <header>
+        <div class="container-fluid" style="margin-bottom: 2%;">
+            <div class="container-fluid">
+                <div class="row" style="background-color: white;">
+                    <div class="col-2 prueba">
+                        <h3>VitaQR</h3>
+                    </div>
+                    <div class="offset-5 col-4 cuotahead">
+                        <h5>Preocupandonos por la salud de los mexicanos</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid" style="margin-bottom: 2%;">
+        <div class="d-flex flex-column align-items-center intro-info">
+            <div class="p-8" style="height: max-content;">
+                <img src="/css/avatar-demo.png" alt="avatar" class="avatar-paciente">
+            </div>
+            <div class="p-4 intro-info-ini">
+                <p>
+                    <%=fila1.fullname%>
+                </p>
+                <p>
+                    <%let fechaNac=new Date(fila1.fechaNac)%>
+                        <%let fechaActual=new Date()%>
+                            <%let edad=fechaActual.getFullYear()-fechaNac.getFullYear() %>
+                                Edad: <%= edad %>
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-12 cabeceras-azules">
+                    <img src="/css/icon-info.png" alt="info" class="basic-info-icon">
+                    <span class="cabeceras-azules-texto">Información básica</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+            <div class="bloq-aux-res">
+              
+                <%if(fila3.inf_bas===1){%>
+                    <div class="row justify-content-between">
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Nombre completo: <span class="query-res">
+                                <%=fila1.fullname%>
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Teléfono: <span class="query-res">
+                                <%=fila1.numTelefono%>
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Fecha de nacimiento: <span class="query-res">
+                                <%=new Date(fila1.fechaNac).toLocaleString().substr(0,9) %>
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Sexo: <span class="query-res">
+                                <%=fila1.sexo%>
+                            </span></div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <!--<div class="col-6 col-sm-3 p-4 columnas-hover">Color de ojos: <span class="query-res">Azules</span></div>-->
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Altura: <span class="query-res">
+                                <%= fila1.altura %> m
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Peso: <span class="query-res">
+                                <%= fila1.peso %> kg
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Donante de organos: <span
+                                class="query-res">No</span>
+                        </div>
+                    </div>
+                <%}else{%>
+                        <p style="text-align: center; padding: 25px; font-weight: 500;">No visible</p>
+                <%}%>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-12 cabeceras-azules">
+                    <img src="/css/contact-book.png" alt="info" class="basic-info-icon">
+                    <span class="cabeceras-azules-texto">Contactos de emergencia</span>
+                </div>
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.contactos===1){%>
+                            <% if(typeof fila2=='undefined' ) { %> <br>
+                                <%} else{ %>
+                                    <% for (let index=0; index < fila2.length; index++) { %>
+                                        <div class="row justify-content-between filas-hover">
+                                            <div class="col-6 col-sm-3 p-4 ">Nombre completo: <span class="query-res">
+                                                    <%=fila2[index].nombreCompleto%>
+                                                </span></div>
+                                            <div class="col-6 col-sm-3 p-4 ">Relación: <span class="query-res">
+                                                    <%=fila2[index].relacion%>
+                                                </span></div>
+                                            <div class="col-6 col-sm-3 p-4 ">Teléfono: <span class="query-res">
+                                                    <%=fila2[index].telefono%>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                            <% }%>
+
+                                                <%}else{%>
+                                                    <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                                        visible</p>
+                                                    <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/allergies.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Alergias</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.alergias===1){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Penicilina</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Relación: <span class="query-res">Reacciones de fiebre,
+                                        falta de aire e hinchazon, no aplicar</span></div>
+                            </div>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Nueces</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Relación: <span class="query-res">No debe ingerir
+                                        nueces</span></div>
+                            </div>
+                            <%}else{%>
+                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                    visible</p>
+                                <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <span class="cabeceras-azules-texto">Padecimientos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.padecimientos===1){%>
+                        <div class="row justify-content-between filas-hover">
+                            <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Faringitis</span></div>
+                            <div class="col-6 col-sm-3 p-4 ">Gravedad: <span class="query-res">leve</span></div>
+                            <div class="col-6 col-sm-3 p-4 ">Causa del padecimiento: <span
+                                    class="query-res">Viral</span>
+                            </div>
+                            <div class="col-6 col-sm-3 p-4 ">Fecha diagnóstico: <span
+                                    class="query-res">16/05/2007</span>
+                            </div>
+                        </div>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/medicine.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Medicamentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.medicamentos===1){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Dextrometorfano</span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Dosis: <span class="query-res">10 cucharadas</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Frecuencia: <span class="query-res">10 hrs</span></div>
+                            </div>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/doctor.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Medico</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.medico===1){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Manuel Aceite De
+                                        Oliva</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Cargo: <span class="query-res">Cabecera</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Especialidad: <span class="query-res">Ortopedico</span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Dependencia: <span class="query-res">IMSS</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Clinica base: <span class="query-res">Clinica #11</span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Consultorio: <span class="query-res">25-B</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Cedula profesional: <span
+                                        class="query-res">asdjhk281DSJK</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Modalidad de trabajo: <span
+                                        class="query-res">Publico</span></div>
+                            </div>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
+
+</body>
+
+</html>

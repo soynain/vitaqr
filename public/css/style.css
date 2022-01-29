@@ -1,0 +1,349 @@
+.imagen{
+    background-image: url("cool-background.png");
+    background-size: auto cover;
+}
+
+.prueba h3{
+    font-size: 30px;
+    font-weight: 500;
+    font-style: italic;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    padding: 10px;
+}
+.cuotahead h5{
+    display: inline-block;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    height: fit-content;
+}
+@media (min-width: 640px) {
+    .cuotahead h5{
+        display: inline-block;
+        font-size: 18px;
+        text-align: center;
+        height: fit-content;
+        font-weight: 500;
+        padding: 10px 0;
+        text-align: center;
+    }
+    .card-deck{
+        justify-content: center;
+    }
+    .avatar-paciente{
+        border: white 10px solid;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        border-width: 7px;
+        position:absolute;
+        top: 0;
+        bottom: 220px;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .cabeceras-azules{
+        padding: 4px;
+        background-color: rgb(56, 159, 243); border-radius: 5px;
+    }
+    .cabeceras-azules-texto{
+        text-align: center; color: white;
+    }
+    .basic-info-icon{
+        width: 30px;
+        height: 30px;
+    }
+    .info-basica{
+        height: auto;
+        border-radius: 5px;
+        background-color: rgb(230, 224, 224);
+        background-size: cover;
+        clear: both;
+    }
+    .bloq-aux-res{
+        font-size: 16px;
+    }
+    .columnas-hover:hover{
+        border: rgb(26, 137, 240) 1px solid;
+    }
+    .filas-hover:hover{
+        border: rgb(26, 137, 240) 1px solid;
+    }
+    /*seccion login start*/
+.login-container{
+    width: 600px;
+    height: auto;
+    border-radius: 20px;
+    margin-left: 27%;
+    
+    display: block;
+    box-shadow: 5px 10px 18px #888888;
+}
+.inic-s{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-align: center;
+    font-weight:bolder;
+}
+.boton-cont-login{
+    position: relative;
+}
+.auxVert{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left:39%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.olvido{
+    text-align: center;
+    background-color: #f0f0f0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.errorMens{
+    border: rgb(0, 0, 0) 1px solid;
+    background-color: rgb(153, 149, 149);
+    text-align: center;
+    height:min-content;
+    width:auto;
+    display: block;
+    padding: 5px;
+}
+/*seccion login fin*/
+
+/*seccion registro ini*/
+.contenedor-registro{
+    border-radius:20px;
+    height:auto;
+    width: 800px;
+    position:absolute;
+    left: 21%;
+    box-shadow: 5px 10px 18px #888888;
+}
+.filabtncent{
+    margin-left: 40%;
+}
+/* seccion reg fin*/
+/*editar contacto inicio*/
+#editContBtn{
+    background-color:green; width:190px;
+}
+#delContBtn{
+    background-color:red; width:190px;
+}
+}
+#chocho{
+    color:white
+}
+@media (min-width: 0px) and (max-width:639px) {
+    .card-deck{
+        margin-left: 7%;
+        justify-content: none;
+    }
+    .avatar-paciente{
+        border: white 10px solid;
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+        border-width: 7px;
+        position:absolute;
+        top: 0;
+        bottom: 40%;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+    .cabeceras-azules{ 
+        background-color: rgb(56, 159, 243); border-radius: 5px;
+        padding: 10px;
+    }
+    .cabeceras-azules-texto{
+        text-align: center; color: white;
+        font-size: 15px;
+        font-weight: 500;
+    }
+    .basic-info-icon{
+        width: 30px;
+        height: 30px;
+    }
+    .info-basica{
+        height: auto;
+        border-radius: 5px;
+        background-color: rgb(230, 224, 224);
+        background-size: cover;
+        clear: both;
+    }
+    .bloq-aux-res{
+        font-size: 16px;
+    }
+    /*seccion login start*/
+.login-container{
+    width: 300px;
+    height: auto;
+    border-radius: 20px;
+    margin-left: 14%;
+    margin-top: 30%;
+    display: block;
+    box-shadow: 5px 10px 18px #888888;
+}
+.inic-s{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+    text-align: center;
+    font-weight:bolder;
+}
+.boton-cont-login{
+    position: relative;
+}
+.auxVert{
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left:29%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.olvido{
+    text-align: center;
+    background-color: #f0f0f0;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+/*seccion login fin*/
+/*seccion registro ini*/
+.contenedor-registro{
+    border-radius:20px;
+    height:auto;
+    width: 300px;
+    position:absolute;
+    left: 15%;
+    margin-top:14%;
+    box-shadow: 5px 10px 18px #888888;
+}
+.filabtncent{
+    margin-left: 28%;
+}
+/* seccion reg fin*/
+/*seccion editar contacto inicio*/
+#editContBtn{
+    background-color:green; width:345px;
+}
+#delContBtn{
+    background-color:red; width:345px;
+}
+}
+
+
+/*tarjetas*/
+.intro-info{
+    background-image: url("1253872.png");
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 400px;
+    border-radius: 20px;
+}
+
+.intro-info-ini{
+    color: black;
+    margin-top: 232px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 500;
+}
+/*tarjetas fin*/
+
+
+/*bloque span para resultados despues del : */
+.query-res{
+    display: block;
+    font-weight: 500;
+}
+/*bloque span para resultados despues del : */
+.cuerpo-qr{
+    padding: 1%;
+    width: 350px;
+    height: 350px;
+}
+#qrcode{
+    display: flex;
+    justify-content: center;
+}
+.qr-img-profile{
+    height: 160px;width: 160px;
+}
+
+#newcontact{
+    font-family: fantasy;
+    font-size: large;
+    
+}
+#img-add-new-contact{
+    cursor:pointer;
+}
+/*forma email recuperacion*/
+.formEmailCont{
+    display: block;
+    padding: 10%;
+
+}
+.helpLabel{
+    text-align: center;
+    display: block;
+}
+.helpLabelOne{
+    text-align: center;
+    display: block;
+    margin-bottom: -7%;
+}
+.emailRecovIco{
+    width: 250px;height: 250px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/*sucess en email seccion*/
+.victoryImage{
+    width: 720px;
+    height: 520px;
+    margin-left: -3%;
+}
+.cajitaExito{
+    display:flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+}
+.helpLabelTwo{
+    text-align: center;
+    display: block;
+    margin-top: 5%;
+}
+/*editar info basica*/
+.principalTxt{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30px;
+    font-style:oblique;
+    font-weight: 700;
+    margin-top: 3%;
+}
+.cabeceraeditar-azul{
+    text-align: center; color: white;
+    font-size: large;
+}
+.logo-contenedor{
+    width: 42px;
+    height: 42px;
+}
+#fechaNacInput{
+    width:610px;
+    padding: 5px;
+    border-radius: 4px;
+    border: 2px;
+    
+}

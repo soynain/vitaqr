@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel principal</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <header>
+        <div class="fill" style="margin-bottom: 6%;">
+            <div class="container-fluid">
+                <div class="row" style="background-color: rgb(146, 146, 146);">
+                    <div class="col-2 prueba">
+                        <a href="/users/profile"><h3 style="color: white;">VitaQR</h3></a>
+                    </div>
+                    <div class="offset-5 col-4 cuotahead">
+                        <h5 style="color: white;">Preocupandonos por la salud de los mexicanos</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="d-flex flex-row justify-content-center" style="margin-bottom: 4%;">
+        <div class="p-2">
+            <div class="card cuerpo-qr">
+                <div class="card-body">
+                    <h5 class="card-title" style="text-align: center;">Su código QR: <%=optionss.extra%>
+                    </h5>
+                    <div id="qrcode"><img class="qr-img-profile" src='<%=optionss.data%>' alt="asdasd"></div>
+                    <!--Para el codigo qr, implementar en node-->
+
+                </div>
+                <button type="button" id="editQRBtn" class="btn btn-outline-light btn-rounded"
+                    style="background-color:green;">
+                    Renovar ID QR
+                </button>
+                <button type="button" id="editPrincBtn" class="btn btn-outline-light btn-rounded"
+                    style="background-color: blue;">
+                    Editar contactos de emergencia
+                </button>
+                <button type="button" id="infBasRed" class="btn btn-outline-light btn-rounded"
+                    style="background-color:rgb(0, 81, 128);">
+                    Editar información básica
+                </button>
+                <button type="button" id="privacidadBtn" class="btn btn-outline-light btn-rounded"
+                    style="background-color:rgb(0, 81, 128);">
+                    Editar opciones de privacidad
+                </button>
+                <button type="button" id="closeBtn" class="btn btn-outline-light btn-rounded"
+                    style="background-color: red;">
+                    Cerrar sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="/js/comp.js"></script>
+</body>
+
+</html>

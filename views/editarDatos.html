@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="../public/css/style.css">
+    <title>Editar datos personales</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="fill" style="margin-bottom: 7%;">
+            <div class="container-fluid">
+                <div class="row" style="background-color: rgb(146, 146, 146);">
+                    <div class="col-2 prueba">
+                        <h3 style="color: white;">VitaQR</h3>
+                    </div>
+                    <div class="offset-5 col-4 cuotahead">
+                        <h5 style="color: white;">Preocupandonos por la salud de los mexicanos</h5>
+                    </div>
+                </div>
+            </div>
+            <p class="principalTxt">Aquí puedes modificar tu información básicaa</p>
+            <p style="text-align: center;">Solo recuerda rellenar bien los campos con datos válidos</p>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12 cabeceras-azules">
+                    <div class="d-flex justify-content-center align-items-center vh-100">
+                        <img src="../public/css/icon-info.png" alt="info" class="logo-contenedor">
+                        <span class="cabeceraeditar-azul">Información básica</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+            <div class="bloq-aux-res">
+
+                <form action="/users/" method="post">
+                    <div class="row justify-content-between">
+                        <div class="col-6 p-4 columnas-hover">Nombre:
+                            <br>
+                            <input class="form-control" name="fullname" type="text" placeholder="Moises Nain Soto Guzman" disabled>
+                        </div>
+                        <div class="col-6 p-4 columnas-hover">Color de ojos:
+                            <br>
+                            <select class="custom-select" name="color_ojos" disabled>
+                                <option selected>Azules</option>
+                                <option value="1">Negros</option>
+                                <option value="2">Cafe</option>
+                                <option value="3">Azules</option>
+                                <option value="4">Verdes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-6 p-4 columnas-hover">Telefono:
+                            <br>
+                            <input class="form-control" name="numTelefono" type="text" placeholder="2282356155" disabled>
+                        </div>
+                        <div class="col-6 p-4 columnas-hover">Altura:
+                            <br>
+                            <input class="form-control" name="altura" type="text" placeholder="1.81" disabled>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-6 p-4 columnas-hover">Fecha de nacimiento:
+                            <br>
+                            <input type="date" name="fechaNac" id="fechaNacInput" required
+                                pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}" disabled>
+                        </div>
+                        <div class="col-6 p-4 columnas-hover">Peso:
+                            <br>
+                            <input class="form-control" name="peso" type="text" placeholder="81 kg" disabled>
+                        </div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <div class="col-12 p-4 columnas-hover">Sexo:
+                            <br>
+                            <select class="custom-select" name="sexo" disabled>
+                                <option selected>Masculino</option>
+                                <option value="1">Femenino</option>
+                                <option value="2">Masculino</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-row justify-content-center align-items-center vh-100">
+                        <div class="p-2"><button type="button" class="btn btn-success">Activar y editar campos</button></div>
+                        <div class="p-2"><button type="submit" class="btn btn-primary" disabled>Guardar cambios</button></div>
+                        <div class="p-2"><button type="button" class="btn btn-light"><a href="/users/profile">Volver</a></button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

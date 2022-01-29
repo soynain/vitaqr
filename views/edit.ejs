@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar contactos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> 
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <div class="fill" style="margin-bottom: 6%;">
+            <div class="container-fluid">
+                <div class="row" style="background-color: rgb(146, 146, 146);">        
+                     <div class="col-2 prueba"><a href="/users/profile"><h3 style="color: white;">VitaQR</h3></a></div>
+                     <div class="offset-5 col-4 cuotahead"><h5 style="color: white;">Preocupandonos por la salud de los mexicanos</h5></div>
+                 </div>
+             </div>
+            </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-12 cabeceras-azules">
+                    <img src="/css/contact-book.png" alt="info" class="basic-info-icon"> 
+                    <span class="cabeceras-azules-texto"> Editar contactos de emergencia</span>
+                </div>
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <!---->
+                    <%if(typeof results=='undefined'){%>
+                    </br>
+                    <%}else{%>
+                        <% for(i=0;i<results.length;i++) { %>
+                            <div class="row justify-content-between filas-hover">         
+                                <div class="col-4 col-sm-2 p-3">Nombre: <span class="query-res nomb"><%=results[i].nombreCompleto%></span></div>
+                                <div class="col-4 col-sm-2 p-3 ">Relación: <span class="query-res"><%=results[i].relacion%></span></div>
+                                <div class="col-4 col-sm-2 p-3 ">telefono: <span class="query-res"><%=results[i].telefono%></span></div>
+                                <!--<div class="col-6 col-sm-2 p-3 ">telefono alternativo: <span class="query-res">+52213123321</span></div>-->
+                                
+                                <div class="col-12 col-sm-2 p-1 justify-content-between ">
+                                    <div class="col-12 col-sm-7">
+                                        <button type="button" id="editContBtn" class="btn btn-outline-light btn-rounded" data-toggle="collapse" data-target="#multiCollapseExample1" aria-expanded="false" aria-controls="multiCollapseExample1">
+                                            Editar
+                                        </button>
+                                    </div>
+                                    <div class="col-12 col-sm-7">
+                                        <button type="button" id="delContBtn" class="btn btn-outline-light btn-rounded">
+                                            Eliminar
+                                        </button>
+                                    </div>
+                                </div>
+                        </div>
+                        <% } %>
+                        <%}%>
+                        <!---->
+                        <div class="collapse" id="multiCollapseExample1">                           
+                            <form action="/users/profile/edit/info-edit" method="post" id="cambiosForm">                       
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                          <label for="nombreCont">Nombre completo</label>
+                                          <input type="text" class="form-control" name="nombreCont" id="nombree" placeholder="" required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="relacionCont">Relación</label>
+                                            <input type="text" class="form-control" name="relacionCont" id="rel" placeholder="" required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="telefonoCont">Teléfono</label>
+                                            <input type="text" class="form-control" name="telefonoCont" id="telee" placeholder="" required pattern="[0-9]{10}">
+                                         </div>
+                                    </div>
+                                   
+                                    <div class="row">
+                                        <div class="col-2 offset-5">
+                                            <button onclick="event.preventDefault(); enviarIndex();"  id="editGuardarBtn" class="btn btn-outline-light btn-rounded" style="background-color:green;">
+                                                Guardar cambios
+                                            </button>
+                                        </div>
+                                   </div>  
+                               </div>
+                         </form>     
+                     </div>
+                    <div class="d-flex flex-row justify-content-center">
+                        <img src="/css/new-user.png" alt="icon" style="width: 90px; height: 90px; " id="img-add-new-contact"
+                        data-toggle="collapse" data-target="#colapsenew" aria-expanded="false" aria-controls="colapsenew">
+                    </div>
+                    <div class="row justify-content-center">
+                        <span id="newcontact">Añadir nuevo contacto</span>
+                        </div>
+                        <div class="collapse" id="colapsenew">                           
+                            <form action="/users/profile/edit/info-new-entry" method="post">                       
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-sm-4">
+                                            <label for="nombreCont">Nombre completo</label>
+                                            <input type="text" class="form-control" name="nombreCont" placeholder="" required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="relacionCont">Relación</label>
+                                            <input type="text" class="form-control" name="relacionCont"  placeholder="" required>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <label for="telefonoCont">Teléfono</label>
+                                            <input type="text" class="form-control" name="telefonoCont"  placeholder="" required pattern="[0-9]{10}">
+                                        </div>
+                                    </div>
+                                       
+                                    <div class="row">
+                                        <div class="col-2 offset-5">
+                                            <button type="submit" id="editNewGuardarBtn" class="btn btn-outline-light btn-rounded" style="background-color:green;">
+                                                Registrar nuevo contacto
+                                            </button>
+                                        </div>
+                                    </div>  
+                                </div>
+                             </form>     
+                         </div>
+
+
+
+                </div>
+        </div>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="/js/contr-ed.js"></script>
+</body>
+</html>

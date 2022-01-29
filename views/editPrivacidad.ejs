@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Opciones de privacidad</title>
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="row" style="background-color: rgb(146, 146, 146);">
+            <div class="col-2 prueba">
+                <a href="/users/profile"><h3 style="color: white;">VitaQR</h3></a>
+            </div>
+            <div class="offset-5 col-4 cuotahead">
+                <h5 style="color: white;">Preocupandonos por la salud de los mexicanos</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex p-2 justify-content-center align-items-center vh-100" style="margin-top: 70px;">
+        <div class="d-flex align-items-center flex-column"
+            style="border: 2px solid black; width: 350px; height: 505px;">
+            <div class="d-flex flex-row">
+                <div class="p-2">Aquí puede modificar los parametros de privacidad de su pulsera QR.
+                    Active el interruptor para mostrar la información o desactivelo para ocultarlo.
+                </div>
+            </div>
+            <form action="/users/profile/privacidad/save" method="POST">
+                <div class="d-flex flex-row">
+                    <div class="p-2">Información básica</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="inf_bas" value="1" type="checkbox" <%=rows.inf_bas===1?"checked":""%> />
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Contactos</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="contactos" value="1" type="checkbox" <%=rows.contactos===1?"checked":""%> value="<%=rows.contactos%>" name="usuario" type="text">
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Alergias</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="alergias" value="1" type="checkbox" <%=rows.alergias===1?"checked":""%> />
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Padecimientos</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="padecimientos" value="1" type="checkbox" <%=rows.padecimientos===1?"checked":""%> />
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Medicamentos</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="medicamentos" value="1" type="checkbox" <%=rows.medicamentos===1?"checked":""%> />
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row">
+                    <div class="p-2">Médico</div>
+                    <div class="p-2"><label class="switch">
+                            <input name="medico" value="1" type="checkbox" <%=rows.medico===1?"checked":""%> />
+                            <span class="slider"></span>
+                        </label></div>
+                </div>
+                <div class="d-flex flex-row align-items-center justify-content-center">
+                    <button type="submit" value="submit" style="border: none; background-color: #2196F3; padding: 5px;
+                    cursor: pointer;">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

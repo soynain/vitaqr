@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>¿Olvidaste tu contraseña?</title>
+</head>
+<body>
+    <header>
+         <div class="fill" style="margin-bottom: 2%;">
+            <div class="container-fluid">
+                <div class="row" style="background-color: rgb(117, 120, 121);">        
+                    <div class="col-2 prueba"><h3 style="color: white;">VitaQR</h3></div>
+                    <div class="offset-5 col-4 cuotahead"><h5 style="color: white;">Preocupandonos por la salud de los mexicanos</h5></div>
+                </div>
+             </div>
+        </div>
+    </header>
+    <h1 class="helpLabel">¿Olvidaste tu contraseña?</h1>
+    <img src="/css/message.png" alt="email icon" class="emailRecovIco">
+    <h2 class="helpLabelOne">introduce tu correo vinculado a tu cuenta para enviarte una contraseña temporal</h2>
+    <form>
+        <div class="form-group formEmailCont">
+          <label for="exampleInputEmail1">Correo electrónico</label>
+          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Introduce tu email">
+          <small id="emailHelp" class="form-text text-muted">Asegurate de que sea tu email con el que te registraron al sistema</small>
+          <button type="button" onclick="validarCorreo()" class="btn btn-primary" id="btnEnviarMail">Enviar correo</button>
+        </div>       
+      </form>
+      <script>
+          const btnSend=document.getElementById('btnEnviarMail')
+          var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        function validarCorreo(){
+            const inputEmail=document.getElementById('exampleInputEmail1')
+              const valorEmail=inputEmail.value 
+              if(valorEmail.match(mailformat)){
+                swal({
+                  title: "Listo",
+                  text: "Se ha enviado tu contraseña a tu correo",
+                  button: "ok",
+                });
+              }else{
+             //     alert('Por favor, introduzca un correo válido')
+                  swal({
+                  title: "error",
+                  text: "Por favor, introduzca un correo válido",
+                  button: "ok",
+                });
+              }
+         }           
+      </script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
