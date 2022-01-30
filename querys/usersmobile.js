@@ -38,7 +38,6 @@ router.get('/datosprincipales', loggedIn, async (req, res) => {
   try {
     const [InformacionPersonal, fields] = await siquel.query(`select fullname,fechaNac,sexo,color_ojos,altura,peso,numTelefono,image from 
     user_prof inner join blob_temp on user_prof.idPrim=blob_temp.id where idPrim=?`, [req.user.idPrim]);
-    //  console.log(InformacionPersonal)
     if (Object.keys(InformacionPersonal).length !== 0) {
       InformacionPersonal['idPulsera'] = req.user.idPulsera
       return res.json({ InformacionPersonal });
@@ -130,7 +129,7 @@ router.post('/renovar-qr', loggedIn, async (req, res) => {
 router.get('/logout', loggedIn, (req, res) =>{
   req.logout();
   res.sendStatus(200)
-  block = false;  //middleware para poder acceder a login y register
+  block = false;  
 });
 
 
