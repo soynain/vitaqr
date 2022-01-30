@@ -53,7 +53,7 @@ router.get('/datosprincipales', loggedIn, async (req, res) => {
 
 router.get('/contactos', loggedIn, async (req, res) => {
   try {
-    const [Contactos, fields] = await promisePool.query('select nombreCompleto, relacion, telefono from contact_info inner join user_prof on contact_info.id_Prim=user_prof.idPrim where id_Prim=?', [req.user.idPrim]);
+    const [Contactos, fields] = await promisePool.query('select id, nombreCompleto, relacion, telefono from contact_info inner join user_prof on contact_info.id_Prim=user_prof.idPrim where id_Prim=?', [req.user.idPrim]);
     console.log(req.useragent);
     if (Contactos.length !== 0) {
       return res.json({ Contactos });
