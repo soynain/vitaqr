@@ -127,5 +127,11 @@ router.post('/renovar-qr', loggedIn, async (req, res) => {
   }
 })
 
+router.get('/logout', loggedIn, (req, res) =>{
+  req.logout();
+  res.sendStatus(200)
+  block = false;  //middleware para poder acceder a login y register
+});
+
 
 module.exports = router

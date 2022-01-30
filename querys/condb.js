@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path')
 const util = require('util')
-
+require('dotenv').config()
 
 
 
@@ -55,7 +55,11 @@ router.get('/:id', async (req, res) => {
         return res.sendStatus(400)
       }
     } else {
-      return res.send('<h1>NO EXISTE</h1')
+      if(req.useragent.isDesktop){
+        return res.send('<h1>NO EXISTE</h1')
+      }else{
+        return res.sendStatus(404)
+      }
     }
   } catch (err) {
     console.log(err, ' primera query');
