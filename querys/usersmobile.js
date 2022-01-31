@@ -36,11 +36,11 @@ router.get('/failed', (req, res) => {
 
 router.get('/datosprincipales', loggedIn, async (req, res) => {
   try {
-    const [InformacionPersonal, fields] = await siquel.query(`select fullname,fechaNac,sexo,color_ojos,altura,peso,numTelefono,image from 
-    user_prof inner join blob_temp on user_prof.idPrim=blob_temp.id where idPrim=?`, [req.user.idPrim]);
-    if (Object.keys(InformacionPersonal).length !== 0) {
-      InformacionPersonal['idPulsera'] = req.user.idPulsera
-      return res.json({ InformacionPersonal });
+    const [InformacionPersonal, fields] = await promisePool.query(`select fullname,fechaNac,sexo,color_ojos,altura,peso,numTelefono,image from 
+    user_prof inner join blob_temp on user_prof.idPulsera=blob_temp.id where idPrim=?`, [req.user.idPrim]);
+   if (Object.keys(InformacionPersonal[0]).length !== 0) {
+      InformacionPersonal[0]['idPulsera'] = req.user.idPulsera
+      return res.json({ InformacionPersonal:InformacionPersonal[0] });
     } else {
       return res.sendStatus(404)
     }
@@ -53,7 +53,7 @@ router.get('/datosprincipales', loggedIn, async (req, res) => {
 router.get('/contactos', loggedIn, async (req, res) => {
   try {
     const [Contactos, fields] = await promisePool.query('select id, nombreCompleto, relacion, telefono from contact_info inner join user_prof on contact_info.id_Prim=user_prof.idPrim where id_Prim=?', [req.user.idPrim]);
-    console.log(req.useragent);
+    // console.log(req.useragent);
     if (Contactos.length !== 0) {
       return res.json({ Contactos });
     } else {
@@ -70,6 +70,7 @@ router.post('/login',
     failureRedirect: '/mobile/failed'
   }), (req, res) => {
     res.sendStatus(200)
+    block = true;
   }
 )
 
@@ -112,9 +113,9 @@ router.post('/renovar-qr', loggedIn, async (req, res) => {
   const newIdPulsera = generatePassword()
   const data = await QRCode.toDataURL(`https://vitaqr.herokuapp.com/show_public_profile/${newIdPulsera}`)
   try {
-    await promisePool.query('update blob_temp set image=? where id=?', [data,idPulsera]);
+    await promisePool.query('update blob_temp set image=? where id=?', [data, idPulsera]);
     try {
-      await promisePool.query('update blob_temp set id=? where id=?', [newIdPulsera,idPulsera]);
+      await promisePool.query('update blob_temp set id=? where id=?', [newIdPulsera, idPulsera]);
       return res.sendStatus(200)
     } catch (err) {
       console.log(err, ' segundo update')
@@ -126,10 +127,10 @@ router.post('/renovar-qr', loggedIn, async (req, res) => {
   }
 })
 
-router.get('/logout', loggedIn, (req, res) =>{
+router.get('/logout', loggedIn, (req, res) => {
   req.logout();
   res.sendStatus(200)
-  block = false;  
+  block = false;
 });
 
 
