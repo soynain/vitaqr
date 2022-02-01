@@ -3,9 +3,6 @@ const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path')
 const util = require('util')
-require('dotenv').config()
-
-
 
 
 const siquel = mysql.createPool({  //creas hilos multiples, para producción
@@ -21,7 +18,6 @@ const siquel = mysql.createPool({  //creas hilos multiples, para producción
 
 
 router.get('/:id', async (req, res) => {
-  console.log(req.useragent)
   let searchValid = req.params.id
   const promisePool = siquel.promise()
   let perQuery={},contactQuery=[],privacyOpc={}

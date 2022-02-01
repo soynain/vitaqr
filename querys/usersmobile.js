@@ -110,13 +110,14 @@ router.post('/delete-contacto', loggedIn, async (req, res) => {
 })
 
 router.post('/renovar-qr', loggedIn, async (req, res) => {
-  const { idPulsera } = req.body
+//  const { idPulsera } = req.body
   const newIdPulsera = generatePassword()
   const data = await QRCode.toDataURL(`https://vitaqr.herokuapp.com/show_public_profile/${newIdPulsera}`)
   try {
-    await promisePool.query('update blob_temp set image=? where id=?', [data, idPulsera]);
+    await promisePool.query('update blob_temp set image=? where id=?', [data, req.user.idPulsera]);
     try {
-      await promisePool.query('update blob_temp set id=? where id=?', [newIdPulsera, idPulsera]);
+      await promisePool.query('update blob_temp set id=? where id=?', [newIdPulsera, req.user.idPulsera]);
+      req.user.idPulsera=newIdPulsera;
       return res.sendStatus(200)
     } catch (err) {
       console.log(err, ' segundo update')
