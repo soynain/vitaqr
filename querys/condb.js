@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path')
 const util = require('util')
-
+require('dotenv').config()
 
 
 
@@ -21,6 +21,7 @@ const siquel = mysql.createPool({  //creas hilos multiples, para producción
 
 
 router.get('/:id', async (req, res) => {
+  console.log(req.useragent)
   let searchValid = req.params.id
   const promisePool = siquel.promise()
   let perQuery={},contactQuery=[],privacyOpc={}
@@ -44,9 +45,9 @@ router.get('/:id', async (req, res) => {
           , [searchValid])
         privacyOpc = results2[0]
         console.log(privacyOpc)
-        if(req.useragent.isDesktop){
+        if(req.useragent.isDesktop || req.useragent.browser!=='okhttp'){
           return res.render('cons.ejs', { fila1: perQuery, fila2: contactQuery, fila3: privacyOpc })
-        }else if(req.useragent.isMobile || req.useragent.isBot){
+        }else if(req.useragent.browser==='okhttp' || req.useragent.isBot){
           const obj={InformacionPersonal:perQuery,Contactos:contactQuery,Privacidad:privacyOpc}
           return res.json(obj)
         }

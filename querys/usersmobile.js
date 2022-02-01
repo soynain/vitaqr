@@ -35,6 +35,7 @@ router.get('/failed', (req, res) => {
 })
 
 router.get('/datosprincipales', loggedIn, async (req, res) => {
+  console.log(req.user.idPrim)
   try {
     const [InformacionPersonal, fields] = await promisePool.query(`select fullname,fechaNac,sexo,color_ojos,altura,peso,numTelefono,image from 
     user_prof inner join blob_temp on user_prof.idPulsera=blob_temp.id where idPrim=?`, [req.user.idPrim]);
