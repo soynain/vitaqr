@@ -30,9 +30,6 @@ function generatePassword(wishlist = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdef
     .join('').toString();
 }
 
-router.get('/failed', (req, res) => {
-  res.sendStatus(401)
-})
 
 router.get('/datosprincipales', loggedIn, async (req, res) => {
   console.log(req.user.idPrim)
@@ -67,12 +64,16 @@ router.get('/contactos', loggedIn, async (req, res) => {
 })
 
 router.post('/login',
-  passport.authenticate('local.signin', {
-    failureRedirect: '/mobile/failed'
-  }), (req, res) => {
-    res.sendStatus(200)
-    block = true;
-  }
+    passport.authenticate('local.signin', {failWithError:true}), 
+    (req, res,next) => {
+        console.log(req.body)
+        return res.sendStatus(200)
+        block = true;
+    },(err,req,res,next)=>{
+        if(err){
+            return res.sendStatus(401)
+        }
+    }
 )
 
 router.post('/mod-informacion-personal', loggedIn, async (req, res) => {

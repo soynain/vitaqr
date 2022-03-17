@@ -11,6 +11,7 @@ const useragent = require('express-useragent');
 var port = process.env.PORT || 3000;
 app.set('view engine', 'ejs') //el view engine que se usa para modificar html dinamico
 require('./querys/auth.js').passport //para inicializar el passport
+require('./querys/authmedico').passport
 
 app.use(session({     //es un iniciador de sesión y cookies que se guarda en mysql
   secret: 'pruebases',
@@ -35,6 +36,8 @@ app.get('/', (req, res) => {
 app.use('/users', require('./querys/users'))   //concatenar una dirección con otro conjunto de direcciones
 app.use('/show_public_profile', require('./querys/condb').router) //lo mismo que arriba
 app.use('/mobile',require('./querys/usersmobile'))
+app.use('/medico',require('./querys/usersdesktop'))
+app.use('/admin',require('./querys/admindesktop'))
 
 app.listen(port, (req, res) => {
   console.log("estoy escuchando");

@@ -5,14 +5,16 @@ const path = require('path')
 const util = require('util')
 
 
-const siquel = mysql.createPool({  //creas hilos multiples, para producción
+const siquel = mysql.createPool({ 
   host: process.env.HOST_NAME,
   port: process.env.PORTDB,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  connectionLimit: 1
+  connectionLimit: 1,
+  timezone:'+00:00'
 });
+
 
 
 

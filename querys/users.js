@@ -23,12 +23,6 @@ function blocki(req, res, next) { //middleware para no acceder a rutas de regist
   }
 }
 
-/*function generatePassword() {
-  var buf = new Uint8Array(6);
-  //ox.getRandomValues(buf)
-  ox.randomFillSync(buf)
-  return Buffer.from(buf, 'binary').toString('base64')
-}*/
 
 function generatePassword(wishlist = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz') {
   return Array.from(ox.randomFillSync(new Uint8Array(8)))
@@ -46,9 +40,9 @@ router.get('/recuperarContra', (req, res) => {
 router.get('/successRecovery', (req, res) => {
   res.sendFile("successRecov.html", { root: path.join(__dirname, '../views') })
 })
-router.get('/register', blocki, (req, res) => {
+/*router.get('/register', blocki, (req, res) => {
   res.render('registro.ejs');
-})
+})*/
 
 router.get('/profile/logout', loggedIn, function (req, res) {
   req.logout();
@@ -86,7 +80,7 @@ router.get('/profile', loggedIn, (req, res) => { //mandar a renderizar el blob d
   })
 })
 
-router.get("/profile/panelInfoBasica", loggedIn, (req, res) => {
+/*router.get("/profile/panelInfoBasica", loggedIn, (req, res) => {
   siquel.execute('select fullname, numTelefono, fechaNac, sexo, color_ojos, altura, peso from user_prof where idPrim=?',
     [req.user.idPrim], (err, results, fields) => {
       if (err) throw err;
@@ -94,7 +88,7 @@ router.get("/profile/panelInfoBasica", loggedIn, (req, res) => {
       console.log(results[0].idDoctor)
       res.render('editarDatos.ejs', { results })
     })
-})
+})*/
 
 router.get('/profile/privacidad', loggedIn, async (req, res) => {
   try {
@@ -147,22 +141,6 @@ router.post('/profile/edit/qr-update', loggedIn, async (req, res) => { //editar 
       })
     })
   })
-
-  // qrcliente = new QRCode(especificaciones);
-  /*qrcliente.toDataURL().then(data => {
-    siquel.query('update `blob_temp` set image=? where id=?', [data, req.user.idPulsera], (err, results, fields) => {
-      if (err) throw err;
-      console.log(data)
-      console.log('código QR ACTUALIZADO')
-      siquel.query('update `blob_temp` set id=? where id=?', [idPulsera, req.user.idPulsera], (err, results, fields) => {
-        if (err) throw err;
-        console.log(data)
-        console.log('código QR ACTUALIZADO')
-        req.user.idPulsera = idPulsera;
-        res.redirect('/users/profile')
-      })
-    })
-  })*/
 })
 
 
@@ -198,7 +176,7 @@ router.post('/profile/edit/info-delete', loggedIn, async (req, res) => { //inser
 
 //en registro se crea un id aleatorio, se insertan los campos principales
 //y luego se genera el qr con el id aleatorio y se inserta en blob_temp
-router.post('/register', async (req, res) => {
+/*router.post('/register', async (req, res) => {
   let errors = [] //es como una implementación chafa de la libreria req.flash
   const idPulsera = generatePassword()
   if (!req.body.nombres || !req.body.usuario || !req.body.contra) {
@@ -230,29 +208,8 @@ router.post('/register', async (req, res) => {
         })
       })
     })
-
-
-    // qrcliente = new QRCode(especificaciones);
-    /* qrcliente.toDataURL().then(data => {
-       siquel.query('INSERT INTO `blob_temp` values(?, ?)', [idPulsera, data], (err, results, fields) => {
-         if (err) throw err;
-         console.log(data)
-         console.log('código QR guardado')
-         siquel.query('INSERT INTO `user_prof` values(null,?,?,?,?,null,null,null,null,null,null,1)', [req.body.nombres, req.body.usuario, hash, idPulsera], (err, results, fields) => {
-           if (err) throw err;
-           console.log(results)
-           siquel.query('INSERT INTO `visibilidad` values(?,1,1,1,1,1,1)', [results.insertId], (err, results, fields) => {
-             if (err) throw err;
-             console.log('usuario registrado')
-             res.render('login', exito = { mensaje: 'ya puede iniciar sesion' })
-           })
-         })
-       })
-     })*/
-
-
   }
-});
+});*/
 
 router.post('/login', (req, res) => { //no hace falta modificar la autenticación
   var mensaje = ''
@@ -276,7 +233,7 @@ router.post('/login', (req, res) => { //no hace falta modificar la autenticació
   })(req, res);
   //s block=true;
 })
-
+/*
 router.post('/profile/panelInfoBasica/modDatos', loggedIn, async (req, res) => {
   const reqObj = req.body
   console.log(reqObj)
@@ -330,76 +287,8 @@ router.post('/profile/panelInfoBasica/modDatos', loggedIn, async (req, res) => {
                 });
             });
         });
-
     });
-  /* for (const key in reqObj) {
-     if (key == 'altura') {
-       let altura = reqObj[key][0]
-       let stringsql = `update user_prof set ${key} = '${altura}' where idPrim=?`
-       console.log(stringsql)
-       siquel.execute(stringsql, [req.user.idPrim],
-         function (err, results, fields) {
-           if (err) throw err;
-           console.log(`${stringsql} ejecutado`)     
-         });
-     } else {
-       let stringsql = `update user_prof set ${key} = '${(reqObj)[key]}' where idPrim=?`
-       console.log(stringsql)
-       siquel.execute(stringsql, [req.user.idPrim],
-         function (err, results, fields) {
-           if (err) throw err;  
-           console.log(`${stringsql} ejecutado`)     
-         });
-     }
-   }*/
+})*/
 
-})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*rutas para app de escritorio*/
-router.post('/logEsc', (req, res) => {
-  console.log(req.body)
-
-  if (req.body.usuario === 'baba' && req.body.contra === '1234') {
-    siquel.query('select nombreCompleto, clinicaBase, consultorio, especialidad, id from medicos where nombreCompleto="manuel aceita de oliva"'
-      , (err, results, fields) => {
-        if (err) throw err;
-        const firstLogin = {
-          nombreComp: results[0].nombreCompleto,
-          clin: results[0].clinicaBase,
-          cons: results[0].consultorio,
-          especialidad: results[0].especialidad
-        }
-        const idMedicoCallback = results[0].id
-        siquel.query('select fullname, medicamentos.nombre from medicamentos inner join user_prof on medicamentos.id=user_prof.idPrim where user_prof.idMedCabecera=?'
-          , [idMedicoCallback], (err, results, fields) => {
-            if (err) throw err;
-            firstLogin.recetas = { results }
-            siquel.query('select fullname from user_prof where idMedCabecera=?;', [idMedicoCallback], (err, resultss, fields) => {
-              if (err) throw err;
-              firstLogin.pacientes = { resultss }
-              res.send(firstLogin)
-              console.log('java procesó la respuesta');
-              console.log(firstLogin)
-            });
-          });
-      });
-  } else {
-    res.sendStatus(404);
-  }
-})
 
 module.exports = router

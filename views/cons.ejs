@@ -36,7 +36,7 @@
             </div>
             <div class="p-4 intro-info-ini">
                 <p>
-                    <%=fila1.fullname%>
+                    <%=fila1.nombres+" "+fila1.apellidos%>
                 </p>
                 <p>
                     <%let fechaNac=new Date(fila1.fechaNac)%>
@@ -65,7 +65,7 @@
                 <%if(fila3.inf_bas===1){%>
                     <div class="row justify-content-between">
                         <div class="col-6 col-sm-3 p-4 columnas-hover">Nombre completo: <span class="query-res">
-                                <%=fila1.fullname%>
+                            <%=fila1.nombres+" "+fila1.apellidos%>
                             </span></div>
                         <div class="col-6 col-sm-3 p-4 columnas-hover">Teléfono: <span class="query-res">
                                 <%=fila1.numTelefono%>
