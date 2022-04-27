@@ -98,7 +98,7 @@ editar.addEventListener('click', async () => {
   }
 });
 
-infBasRed.addEventListener('click', async()=>{
+/*infBasRed.addEventListener('click', async()=>{
   try {
     await fetch('/users/profile/panelInfoBasica', {  //responde nos devuelve un objeto con parametros varios
       method: 'GET',
@@ -110,7 +110,7 @@ infBasRed.addEventListener('click', async()=>{
   } catch (err) {
     console.error(`Error: ${err}`);
   }
-})
+})*/
 
 privacidadBtn.addEventListener('click', async()=>{
   try {
