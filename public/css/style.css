@@ -224,11 +224,14 @@
 }
 /* seccion reg fin*/
 /*seccion editar contacto inicio*/
+
 #editContBtn{
-    background-color:green; width:345px;
+    background-color:green; 
+    width: 100%;
 }
 #delContBtn{
-    background-color:red; width:345px;
+    background-color:red; 
+    width: 100%
 }
 }
 
