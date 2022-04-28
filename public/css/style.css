@@ -224,6 +224,11 @@
 }
 /* seccion reg fin*/
 /*seccion editar contacto inicio*/
+.cont-newbtn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 #editContBtn{
     background-color:green; 
