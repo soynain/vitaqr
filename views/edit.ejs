@@ -34,10 +34,11 @@
                     </br>
                     <%}else{%>
                         <% for(i=0;i<results.length;i++) { %>
-                            <div class="row justify-content-between filas-hover">         
-                                <div class="col-4 col-sm-2 p-3">Nombre: <span class="query-res nomb"><%=results[i].nombreCompleto%></span></div>
-                                <div class="col-4 col-sm-2 p-3 ">Relación: <span class="query-res"><%=results[i].relacion%></span></div>
-                                <div class="col-4 col-sm-2 p-3 ">telefono: <span class="query-res"><%=results[i].telefono%></span></div>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-1 col-sm-2 p-3 ">ID: <span class="query-res id"><%=results[i].id%></span></div>         
+                                <div class="col-2 col-sm-2 p-3 ">Nombre: <span class="query-res nomb"><%=results[i].nombreCompleto%></span></div>
+                                <div class="col-2 col-sm-2 p-3 ">Relación: <span class="query-res"><%=results[i].relacion%></span></div>
+                                <div class="col-4 col-sm-2 p-3 columnitas">telefono: <span class="query-res"><%=results[i].telefono%></span></div>
                                 <!--<div class="col-6 col-sm-2 p-3 ">telefono alternativo: <span class="query-res">+52213123321</span></div>-->
                                 
                                 <div class="col-12 col-sm-2 p-1 justify-content-between ">

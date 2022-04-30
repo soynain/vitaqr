@@ -145,7 +145,7 @@ router.post('/profile/edit/qr-update', loggedIn, async (req, res) => { //editar 
 
 
 router.post('/profile/edit/info-edit', loggedIn, async (req, res) => { //editar contactos existentes, el where se modifica con el foreign ke
-  siquel.execute('UPDATE `contact_info` set nombreCompleto = ?, relacion = ?, telefono = ? where nombreCompleto=?',
+  siquel.execute('UPDATE `contact_info` set nombreCompleto = ?, relacion = ?, telefono = ? where id=?',
     [req.body.nombreCont, req.body.relacionCont, req.body.telefonoCont, req.body.nombreCompletoAnterior], (err, results, fields) => {
       if (err) throw err;
       console.log('usuario modificado')
@@ -166,7 +166,7 @@ router.post('/profile/edit/info-new-entry', loggedIn, async (req, res) => { //in
 })
 
 router.post('/profile/edit/info-delete', loggedIn, async (req, res) => { //insertar nuevo contacto, no muchas modificaciones mas que el foreign key
-  siquel.query('DELETE FROM `contact_info` where nombreCompleto=?', [req.body.nombre], (err, results, fields) => {
+  siquel.query('DELETE FROM `contact_info` where id=?', [req.body.nombre], (err, results, fields) => {
     if (err) throw err;
     console.log('usuario eliminado')
     res.redirect('/users/profile/edit')

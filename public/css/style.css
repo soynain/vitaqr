@@ -238,6 +238,13 @@
     background-color:red; 
     width: 100%
 }
+.columnitas:hover{
+    border: rgb(26, 137, 240) 1px solid;
+}
+
+.columnitas{
+    
+}
 }
 
 

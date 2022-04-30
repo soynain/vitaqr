@@ -1,6 +1,6 @@
 const btnDelete = document.querySelectorAll('#delContBtn')
 const btnEdit = document.querySelectorAll('#editContBtn')
-const auxs = document.querySelectorAll('.nomb')
+const auxs = document.querySelectorAll('.id')
 const formulario = document.getElementById('cambiosForm');
 const nombrecompleto = document.getElementById('nombree')
 const relaciontxt = document.getElementById('rel')
