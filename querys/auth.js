@@ -15,6 +15,7 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
   }, async (req, usuario, contra, done) => {
     const rows = await siquel.query('SELECT * FROM `user_prof` WHERE usuario = ?', [usuario]);
+    console.log(rows[0])
     if (rows.length > 0) {
       //rows son filas, 0 que almacenaras una fila, y user es el objeto con las columnas
       const user = rows[0];  
@@ -30,11 +31,12 @@ passport.use('local.signin', new LocalStrategy({
   }));
 
 passport.serializeUser((user, done) => {
+  console.log(user,'dasdasd')
     done(null, user);
 });
-passport.deserializeUser(async (id, done) => {
-  console.log(id);
-    await siquel.query('SELECT * FROM `user_prof` where idPrim = ?', [id.idPrim],(err, rows)=>{
+passport.deserializeUser(async (user, done) => {
+  console.log(user,'pene')
+    await siquel.query('SELECT * FROM `user_prof` where idPrim = ?', [user.idPrim],(err, rows)=>{
       done(null, rows[0]);
     });
   });

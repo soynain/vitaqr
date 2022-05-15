@@ -3,17 +3,17 @@ const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path')
 const util = require('util')
-//require('dotenv').config()
+// require('dotenv').config()
 
 
-const siquel = mysql.createPool({ 
+const siquel = mysql.createPool({
   host: process.env.HOST_NAME,
   port: process.env.PORTDB,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
   connectionLimit: 1,
-  timezone:'+00:00'
+  timezone: '+00:00'
 });
 
 
@@ -23,7 +23,7 @@ const siquel = mysql.createPool({
 router.get('/:id', async (req, res) => {
   let searchValid = req.params.id
   const promisePool = siquel.promise()
-  let perQuery={},contactQuery=[],privacyOpc={}
+  let perQuery = {}, contactQuery = [], privacyOpc = {}
   try {
     const [results, fields] = await promisePool.execute('SELECT * FROM `user_prof` where idPulsera = ?', [searchValid])
     if (results.length > 0) {
@@ -40,24 +40,53 @@ router.get('/:id', async (req, res) => {
         return res.sendStatus(400)
       }
       try {
-        const [results2, fields] = await promisePool.execute('select idvis,inf_bas,contactos,alergias,padecimientos,medicamentos,medico from `user_prof` inner join visibilidad on visibilidad.idvis=user_prof.idPrim where idPulsera=?'
+        const [results2, fields] = await promisePool.execute('select idvis,inf_bas,contactos,alergias,padecimientos,medicamentos,medico from `user_prof` inner join visibilidad on visibilidad.idvis=user_prof.idPrim where idPulsera=?;'
           , [searchValid])
         privacyOpc = results2[0]
-        console.log(privacyOpc)
-        if(req.useragent.isDesktop || req.useragent.browser!=='okhttp'){
-          return res.render('cons.ejs', { fila1: perQuery, fila2: contactQuery, fila3: privacyOpc })
-        }else if(req.useragent.browser==='okhttp' || req.useragent.isBot){
-          const obj={InformacionPersonal:perQuery,Contactos:contactQuery,Privacidad:privacyOpc}
-          return res.json(obj)
+        // console.log(privacyOpc)
+        try {
+          const [results3, fields] = await promisePool.execute('select nombre,gravedad,causa,fechaDiagnostico from `user_prof` inner join padecimientos on idPac=idPrim where idPulsera=?;'
+            , [searchValid])
+          padecimientosQuery = results3
+          console.log(padecimientosQuery)
+          try {
+            const [results4, fields] = await promisePool.execute('select nombre,dosis,frecuencia,fechaInicio from `user_prof` inner join medicamentos on idPac=idPrim where idPulsera=?;'
+              , [searchValid])
+            medicamentosQuery = results4
+            console.log(medicamentosQuery)
+            try {
+              const [results5, fields] = await promisePool.execute('select nombre,reaccion,sintomas,fechaDiagnostico from `user_prof` inner join alergias on idPac=idPrim where idPulsera=?;'
+                , [searchValid])
+              alergiasQuery = results5
+              console.log(alergiasQuery)
+              if (req.useragent.isDesktop || req.useragent.browser !== 'okhttp') {
+                return res.render('cons.ejs', { fila1: perQuery, fila2: contactQuery, fila3: privacyOpc, fila4:padecimientosQuery,fila5:medicamentosQuery,fila6:alergiasQuery })
+              } else if (req.useragent.browser === 'okhttp' || req.useragent.isBot) {
+                const obj = { InformacionPersonal: perQuery, Contactos: contactQuery, Privacidad: privacyOpc }
+                return res.json(obj)
+              }
+            } catch (err) {
+              console.log(err, ' sexta query')
+              return res.sendStatus(400)
+            }
+          } catch (err) {
+            console.log(err, ' quinta query')
+            return res.sendStatus(400)
+          }
+
+        } catch (err) {
+          console.log(err, ' cuarta query')
+          return res.sendStatus(400)
         }
+
       } catch (err) {
         console.log(err, ' tercera query')
         return res.sendStatus(400)
       }
     } else {
-      if(req.useragent.isDesktop){
+      if (req.useragent.isDesktop) {
         return res.send('<h1>NO EXISTE</h1')
-      }else{
+      } else {
         return res.sendStatus(404)
       }
     }

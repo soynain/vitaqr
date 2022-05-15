@@ -211,7 +211,7 @@ router.post('/profile/edit/info-delete', loggedIn, async (req, res) => { //inser
   }
 });*/
 
-router.post('/login', (req, res) => { //no hace falta modificar la autenticación
+router.post('/login', (req, res,next) => { //no hace falta modificar la autenticación
   var mensaje = ''
 
   if (!req.body.usuario || !req.body.contra) {
@@ -219,7 +219,7 @@ router.post('/login', (req, res) => { //no hace falta modificar la autenticació
   } else {
     mensaje = 'Por favor revise si su usuario y contraseña son correctos'
   }
-  passport.authenticate('local.signin', function (err, user) {
+  passport.authenticate('local.signin',  (err, user)=> {
     if (err) throw err
     // User does not exist
     if (!user) {
