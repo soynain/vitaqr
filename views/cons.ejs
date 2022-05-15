@@ -170,7 +170,7 @@
                                                                 </span></div>
                                                             <div class="col-6 col-sm-3 p-4 ">Fecha diagnostico: <span
                                                                     class="query-res">
-                                                                    <%=new Date(fila6[index].fechaDiagnostico).toLocaleString().substr(0,9)%>
+                                                                    <%=new Date(fila6[index].fechaDiagnostico).toLocaleString().substr(0,8)%>
                                                                 </span></div>
                                                         </div>
                                                         <%}%>
@@ -249,15 +249,15 @@
                                                 <%} else{ %>
                                                     <% for (let index=0; index < fila5.length; index++) { %>
                                                     <div class="row justify-content-between filas-hover">
-                                                        <div class="col-6 col-sm-3 p-4 ">Nombre: <span
+                                                        <div class="col-6 col-sm-3 p-3 ">Nombre: <span
                                                                 class="query-res"><%=fila5[index].nombre%></span>
                                                         </div>
-                                                        <div class="col-6 col-sm-3 p-4 ">Dosis: <span
+                                                        <div class="col-6 col-sm-3 p-3 ">Dosis: <span
                                                                 class="query-res"><%=fila5[index].dosis%>s</span></div>
-                                                        <div class="col-6 col-sm-3 p-4 ">Frecuencia: <span
+                                                        <div class="col-6 col-sm-3 p-3 ">Frecuencia: <span
                                                                 class="query-res"><%=fila5[index].frecuencia%></span></div>
                                                     </div>
-                                                    <div class="col-6 col-sm-3 p-4 ">Fecha inicio: <span
+                                                    <div class="col-6 col-sm-3 p-3 ">Fecha inicio: <span
                                                             class="query-res"><%=new Date(fila5[index].fechaInicio).toLocaleString().substr(0,9)%></span></div>
                                     </div>
                                     <%}%>
