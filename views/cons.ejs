@@ -49,281 +49,229 @@
     </div>
 
 
-    <div class=" container-fluid">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-3 col-12 cabeceras-azules">
-                                    <img src="/css/icon-info.png" alt="info" class="basic-info-icon">
-                                    <span class="cabeceras-azules-texto">Información básica</span>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-12 cabeceras-azules">
+                    <img src="/css/icon-info.png" alt="info" class="basic-info-icon">
+                    <span class="cabeceras-azules-texto">Información básica</span>
+                </div>
+            </div>
+        </div>
 
-                        <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                            <div class="bloq-aux-res">
-
-                                <%if(fila3.inf_bas===1){%>
-                                    <div class="row justify-content-between">
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Nombre completo: <span
-                                                class="query-res">
-                                                <%=fila1.nombres+" "+fila1.apellidos%>
+        <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+            <div class="bloq-aux-res">
+              
+                <%if(fila3.inf_bas===1){%>
+                    <div class="row justify-content-between">
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Nombre completo: <span class="query-res">
+                            <%=fila1.nombres+" "+fila1.apellidos%>
                             </span></div>
-                        <div class=" col-6 col-sm-3 p-4 columnas-hover">Teléfono: <span class="query-res">
-                                                        <%=fila1.numTelefono%>
-                                                    </span></div>
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Fecha de nacimiento: <span
-                                                class="query-res">
-                                                <%=new Date(fila1.fechaNac).toLocaleString().substr(0,9) %>
-                                            </span></div>
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Sexo: <span class="query-res">
-                                                <%=fila1.sexo%>
-                                            </span></div>
-                                    </div>
-                                    <div class="row justify-content-between">
-                                        <!--<div class="col-6 col-sm-3 p-4 columnas-hover">Color de ojos: <span class="query-res">Azules</span></div>-->
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Altura: <span class="query-res">
-                                                <%= fila1.altura %> m
-                                            </span></div>
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Peso: <span class="query-res">
-                                                <%= fila1.peso %> kg
-                                            </span></div>
-                                        <div class="col-6 col-sm-3 p-4 columnas-hover">Donante de organos: <span
-                                                class="query-res">No</span>
-                                        </div>
-                                    </div>
-                                    <%}else{%>
-                                        <p style="text-align: center; padding: 25px; font-weight: 500;">No visible</p>
-                                        <%}%>
-                            </div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Teléfono: <span class="query-res">
+                                <%=fila1.numTelefono%>
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Fecha de nacimiento: <span class="query-res">
+                                <%=new Date(fila1.fechaNac).toLocaleString().substr(0,9) %>
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Sexo: <span class="query-res">
+                                <%=fila1.sexo%>
+                            </span></div>
+                    </div>
+                    <div class="row justify-content-between">
+                        <!--<div class="col-6 col-sm-3 p-4 columnas-hover">Color de ojos: <span class="query-res">Azules</span></div>-->
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Altura: <span class="query-res">
+                                <%= fila1.altura %> m
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Peso: <span class="query-res">
+                                <%= fila1.peso %> kg
+                            </span></div>
+                        <div class="col-6 col-sm-3 p-4 columnas-hover">Donante de organos: <span
+                                class="query-res">No</span>
                         </div>
+                    </div>
+                <%}else{%>
+                        <p style="text-align: center; padding: 25px; font-weight: 500;">No visible</p>
+                <%}%>
+            </div>
+        </div>
 
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-sm-3 col-12 cabeceras-azules">
-                                    <img src="/css/contact-book.png" alt="info" class="basic-info-icon">
-                                    <span class="cabeceras-azules-texto">Contactos de emergencia</span>
-                                </div>
-                                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                                    <div class="bloq-aux-res">
-                                        <%if(fila3.contactos===1){%>
-                                            <% if(Object.entries(fila2).length==0 ) { %> <br>
-                                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                    tienes contactos registrados</p>
-                                                <%} else{ %>
-                                                    <% for (let index=0; index < fila2.length; index++) { %>
-                                                        <div class="row justify-content-between filas-hover">
-                                                            <div class="col-6 col-sm-3 p-4 ">Nombre completo: <span
-                                                                    class="query-res">
-                                                                    <%=fila2[index].nombreCompleto%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Relación: <span
-                                                                    class="query-res">
-                                                                    <%=fila2[index].relacion%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Teléfono: <span
-                                                                    class="query-res">
-                                                                    <%=fila2[index].telefono%>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <% } %>
-                                                            <% }%>
-
-                                                                <%}else{%>
-                                                                    <p
-                                                                        style="text-align: center; padding: 25px; font-weight: 500;">
-                                                                        No
-                                                                        visible</p>
-                                                                    <%}%>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-3 col-12 cabeceras-azules">
-                                            <img src="/css/allergies.png" alt="info" class="basic-info-icon">
-                                            <span class="cabeceras-azules-texto">Alergias</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                                    <div class="bloq-aux-res">
-                                        <%if(fila3.alergias===1){%>
-                                            <% if(Object.entries(fila6).length==0) { %> <br>
-                                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                    tienes alergias registradas</p>
-                                                <%} else{ %>
-                                                    <% for (let index=0; index < fila6.length; index++) { %>
-                                                        <div class="row justify-content-between filas-hover">
-                                                            <div class="col-6 col-sm-3 p-4 ">Nombre: <span
-                                                                    class="query-res">
-                                                                    <%=fila6[index].nombre%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Reacción: <span
-                                                                    class="query-res">
-                                                                    <%=fila6[index].reaccion%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Sintomas: <span
-                                                                    class="query-res">
-                                                                    <%=fila6[index].sintomas%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Fecha diagnostico: <span
-                                                                    class="query-res">
-                                                                    <%=new Date(fila6[index].fechaDiagnostico).toLocaleString().substr(0,8)%>
-                                                                </span></div>
-                                                        </div>
-                                                        <%}%>
-                                                            <%}%>
-                                                                <%}else{%>
-                                                                    <p
-                                                                        style="text-align: center; padding: 25px; font-weight: 500;">
-                                                                        No
-                                                                        visible</p>
-                                                                    <%}%>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-3 col-12 cabeceras-azules">
-                                            <span class="cabeceras-azules-texto">Padecimientos</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                                    <div class="bloq-aux-res">
-                                        <%if(fila3.padecimientos===1){%>
-                                            <% if(Object.entries(fila4).length==0 ) { %> <br>
-                                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                    tienes padecimientos registrados</p>
-                                                <%} else{ %>
-                                                    <% for (let index=0; index < fila4.length; index++) { %>
-                                                        <div class="row justify-content-between filas-hover">
-                                                            <div class="col-6 col-sm-3 p-4 ">Nombre: <span
-                                                                    class="query-res">
-                                                                    <%=fila4[index].nombre%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Gravedad: <span
-                                                                    class="query-res">
-                                                                    <%=fila4[index].gravedad%>
-                                                                </span></div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Causa del padecimiento:
-                                                                <span class="query-res">
-                                                                    <%=fila4[index].causa%>
-                                                                </span>
-                                                            </div>
-                                                            <div class="col-6 col-sm-3 p-4 ">Fecha diagnóstico: <span
-                                                                    class="query-res">
-                                                                    <%=new Date(fila4[index].fechaDiagnostico).toLocaleString().substr(0,9)%>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                        <%}%>
-                                                            <%}%>
-                                                                <%}else{%>
-                                                                    <p
-                                                                        style="text-align: center; padding: 25px; font-weight: 500;">
-                                                                        No
-                                                                        visible</p>
-                                                                    <%}%>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-sm-3 col-12 cabeceras-azules">
-                                            <img src="/css/medicine.png" alt="info" class="basic-info-icon">
-                                            <span class="cabeceras-azules-texto">Medicamentos</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                                    <div class="bloq-aux-res">
-                                        <%if(fila3.medicamentos===1){%>
-                                            <% if(Object.entries(fila5).length==0 ) { %> <br>
-                                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                    tienes medicamentos registrados</p>
-                                                <%} else{ %>
-                                                    <% for (let index=0; index < fila5.length; index++) { %>
-                                                    <div class="row justify-content-between filas-hover">
-                                                        <div class="col-3 col-sm-3 p-4 ">Nombre: <span
-                                                                class="query-res"><%=fila5[index].nombre%></span>
-                                                        </div>
-                                                        <div class="col-3 col-sm-3 p-4 ">Dosis: <span
-                                                                class="query-res"><%=fila5[index].dosis%>s</span></div>
-                                                        <div class="col-3 col-sm-3 p-4 ">Frecuencia: <span
-                                                                class="query-res"><%=fila5[index].frecuencia%></span></div>
-                                                    </div>
-                                                    <div class="col-3 col-sm-3 p-4 ">Fecha inicio: <span
-                                                            class="query-res"><%=new Date(fila5[index].fechaInicio).toLocaleString().substr(0,9)%></span></div>
-                                    </div>
-                                    <%}%>
-                                        <%}%>
-                                            <%}else{%>
-                                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                    visible</p>
-                                                <%}%>
-                                </div>
-                            </div>
-
-                            <div class="container-fluid">
-                                <div class="row">
-                                    <div class="col-sm-3 col-12 cabeceras-azules">
-                                        <img src="/css/doctor.png" alt="info" class="basic-info-icon">
-                                        <span class="cabeceras-azules-texto">Medico</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="container-fluid info-basica" style="margin-bottom: 2%;">
-                                <div class="bloq-aux-res">
-                                    <%if(fila3.medico===1){%>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-3 col-12 cabeceras-azules">
+                    <img src="/css/contact-book.png" alt="info" class="basic-info-icon">
+                    <span class="cabeceras-azules-texto">Contactos de emergencia</span>
+                </div>
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.contactos===1){%>
+                            <% if(typeof fila2=='undefined' ) { %> <br>
+                                <%} else{ %>
+                                    <% for (let index=0; index < fila2.length; index++) { %>
                                         <div class="row justify-content-between filas-hover">
-                                            <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Manuel
-                                                    Aceite De
-                                                    Oliva</span></div>
-                                            <div class="col-6 col-sm-3 p-4 ">Cargo: <span
-                                                    class="query-res">Cabecera</span></div>
-                                            <div class="col-6 col-sm-3 p-4 ">Especialidad: <span
-                                                    class="query-res">Ortopedico</span>
+                                            <div class="col-6 col-sm-3 p-4 ">Nombre completo: <span class="query-res">
+                                                    <%=fila2[index].nombreCompleto%>
+                                                </span></div>
+                                            <div class="col-6 col-sm-3 p-4 ">Relación: <span class="query-res">
+                                                    <%=fila2[index].relacion%>
+                                                </span></div>
+                                            <div class="col-6 col-sm-3 p-4 ">Teléfono: <span class="query-res">
+                                                    <%=fila2[index].telefono%>
+                                                </span>
                                             </div>
-                                            <div class="col-6 col-sm-3 p-4 ">Dependencia: <span
-                                                    class="query-res">IMSS</span></div>
-                                            <div class="col-6 col-sm-3 p-4 ">Clinica base: <span
-                                                    class="query-res">Clinica #11</span>
-                                            </div>
-                                            <div class="col-6 col-sm-3 p-4 ">Consultorio: <span
-                                                    class="query-res">25-B</span></div>
-                                            <div class="col-6 col-sm-3 p-4 ">Cedula profesional: <span
-                                                    class="query-res">asdjhk281DSJK</span></div>
-                                            <div class="col-6 col-sm-3 p-4 ">Modalidad de trabajo: <span
-                                                    class="query-res">Publico</span></div>
                                         </div>
-                                        <%}else{%>
-                                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
-                                                visible</p>
-                                            <%}%>
-                                </div>
-                            </div>
+                                        <% } %>
+                                            <% }%>
 
+                                                <%}else{%>
+                                                    <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                                        visible</p>
+                                                    <%}%>
+                    </div>
+                </div>
 
-
-
-
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/allergies.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Alergias</span>
                         </div>
+                    </div>
+                </div>
 
-                        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-                            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-                            crossorigin="anonymous"></script>
-                        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                            crossorigin="anonymous"></script>
-                        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                            crossorigin="anonymous"></script>
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.alergias===1){%>
+                            <%if(Object.entries(fila6).length==0){%><br>
+                            <%}else{%>
+                            <%for(let index=0;index < fila6.length ; index++){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-3 col-sm-3 p-4 ">Nombre: <span class="query-res"><%=fila6[index].nombre%></span></div>
+                                <div class="col-3 col-sm-3 p-4 ">Reacción: <span class="query-res"><%=fila6[index].reaccion%></span></div>
+                                <div class="col-3 col-sm-3 p-4 ">Sintomas: <span class="query-res"><%=fila6[index].sintomas%></span></div>
+                                <div class="col-3 col-sm-3 p-4 ">Fecha diagnostico: <span class="query-res"><%=new Date(fila6[index].fechaDiagnostico).toLocaleString().substr(0,9)%></span></div>
+                            </div>
+                           <%}%>
+                            <%}%>
+                            <%}else{%>
+                                <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                    visible</p>
+                                <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <span class="cabeceras-azules-texto">Padecimientos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.padecimientos===1){%>
+                            <%if(Object.entries(fila4).length==0){%><br>
+                                <%}else{%>
+                        <%for(let index=0;index < fila4.length ; index++){%>
+                        <div class="row justify-content-between filas-hover">
+                            <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res"><%=fila4[index].nombre%></span></div>
+                            <div class="col-6 col-sm-3 p-4 ">Gravedad: <span class="query-res"><%=fila4[index].gravedad%></span></div>
+                            <div class="col-6 col-sm-3 p-4 ">Causa del padecimiento: <span
+                                    class="query-res"><%=fila4[index].causa%></span>
+                            </div>
+                            <div class="col-6 col-sm-3 p-4 ">Fecha diagnóstico: <span
+                                    class="query-res"><%=new Date(fila4[index].fechaDiagnostico).toLocaleString().substr(0,9)%></span>
+                            </div>
+                        </div>
+                        <%}%>
+                        <%}%>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/medicine.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Medicamentos</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.medicamentos===1){%>
+                            <%if(Object.entries(fila5).length==0){%><br>
+                            <%}else{%>
+                                <%for(let index=0;index < fila5.length;index++){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res"><%=fila5[index].nombre%></span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Dosis: <span class="query-res"><%=fila5[index].dosis%></span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Frecuencia: <span class="query-res"><%=fila5[index].frecuencia%></span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Fecha inicio: <span class="query-res"><%=new Date(fila5[index].fechaInicio).toLocaleString().substr(0,9)%></span></div>
+                            </div>
+                            <%}%>
+                            <%}%>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-3 col-12 cabeceras-azules">
+                            <img src="/css/doctor.png" alt="info" class="basic-info-icon">
+                            <span class="cabeceras-azules-texto">Medico</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid info-basica" style="margin-bottom: 2%;">
+                    <div class="bloq-aux-res">
+                        <%if(fila3.medico===1){%>
+                            <div class="row justify-content-between filas-hover">
+                                <div class="col-6 col-sm-3 p-4 ">Nombre: <span class="query-res">Manuel Aceite De
+                                        Oliva</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Cargo: <span class="query-res">Cabecera</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Especialidad: <span class="query-res">Ortopedico</span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Dependencia: <span class="query-res">IMSS</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Clinica base: <span class="query-res">Clinica #11</span>
+                                </div>
+                                <div class="col-6 col-sm-3 p-4 ">Consultorio: <span class="query-res">25-B</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Cedula profesional: <span
+                                        class="query-res">asdjhk281DSJK</span></div>
+                                <div class="col-6 col-sm-3 p-4 ">Modalidad de trabajo: <span
+                                        class="query-res">Publico</span></div>
+                            </div>
+                        <%}else{%>
+                            <p style="text-align: center; padding: 25px; font-weight: 500;">No
+                                visible</p>
+                        <%}%>
+                    </div>
+                </div>
+
+
+
+
+
+            </div>
+
+            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+                crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous"></script>
 
 </body>
 

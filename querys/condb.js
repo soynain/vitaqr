@@ -3,7 +3,7 @@ const router = express.Router();
 const mysql = require('mysql2');
 const path = require('path')
 const util = require('util')
-// require('dotenv').config()
+require('dotenv').config()
 
 
 const siquel = mysql.createPool({
